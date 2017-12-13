@@ -1,5 +1,6 @@
 package br.edu.ifpb.jse;
 
+import br.edu.ifpb.shared.Calculadora;
 import br.edu.ifpb.shared.ServiceLocator;
 
 /*
@@ -18,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     private ServiceLocator locato;
+    private Calculadora calculadora;
     public Principal() {
         initComponents();
     }
@@ -45,7 +47,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Resultado");
+        jLabel1.setText("RESULTADO:");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +68,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +92,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+this.locato = new ServiceLocator();
+this.calculadora = this.locato.
+        lookup("java:global/core/CalculadoraImpl", Calculadora.class);
+int x = Integer.parseInt(jTextField1.getText());
+int y = Integer.parseInt(jTextField2.getText());
+        int resultado = calculadora.somar(x, y);
+jLabel1.setText("RESULTADO: "+resultado);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
