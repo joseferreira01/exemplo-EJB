@@ -9,6 +9,7 @@
         <module>shared</module>
         <module>jsf</module>
         <module>core</module>
+        <module>jse</module>
     </modules>
     <dependencies>
         <dependency>
