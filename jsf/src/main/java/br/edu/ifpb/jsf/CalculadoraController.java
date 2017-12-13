@@ -20,7 +20,7 @@ import javax.inject.Named;
 public class CalculadoraController {
     private int x;
     private int y;
-    private int resultado=2;
+    private int resultado;
     private ServiceLocator locator;
     private Calculadora calculadora;
     @PostConstruct
