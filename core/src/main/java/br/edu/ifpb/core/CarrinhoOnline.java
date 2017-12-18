@@ -35,6 +35,7 @@ public class CarrinhoOnline implements Carrinho {
 
     @Override
     public void add(String produto) {
+        System.err.println(produto+": adicionado");
         this.produtos.add(produto);
     }
 
