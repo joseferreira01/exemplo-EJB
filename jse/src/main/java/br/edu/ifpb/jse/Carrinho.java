@@ -20,9 +20,9 @@ public class Carrinho extends javax.swing.JFrame {
      */
     public Carrinho() {
         initComponents();
-      
+
         service = new CarrinnhoService();
-        //  initTB();
+       initTB();
 
     }
 
@@ -126,6 +126,7 @@ public class Carrinho extends javax.swing.JFrame {
         produto = tfProduto.getText();
         service.add(produto);
         tfProduto.setText("");
+        initTB();
     }//GEN-LAST:event_BTAddProdutoActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
@@ -133,7 +134,11 @@ public class Carrinho extends javax.swing.JFrame {
         produto = String.valueOf(produtos.getModel()
                 .getValueAt(produtos.getSelectedRow(),
                          produtos.getSelectedColumn()));
-
+     DefaultTableModel val = (DefaultTableModel) produtos.getModel();
+    // initTB();
+     
+     val.removeRow(produtos.getSelectedRow());
+        
     }//GEN-LAST:event_btRemoverActionPerformed
 
     /**
@@ -182,7 +187,13 @@ public class Carrinho extends javax.swing.JFrame {
 
     private void initTB() {
         DefaultTableModel val = (DefaultTableModel) produtos.getModel();
-        String[] e = (String[]) service.todosProdutos().toArray();
-        val.addRow(e);
+//        String[] e = (String[]) service.todosProdutos().toArray();
+//        System.err.println("rest "+e);
+//        val.addRow(e);
+for (String elem : service.todosProdutos()) {
+             val.addRow(new String[]{elem});
+        }
+       
+         
     }
 }

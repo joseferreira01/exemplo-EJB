@@ -54,7 +54,7 @@ public class CarrinhoOnline implements Carrinho {
 
     @Override
     public List<String> todosProdutos() {
-        System.err.println("listadondo produtos");
+        System.err.println("listadondo produtos"+produtos);
         //produtos.forEach(System.out::print());
         return Collections.unmodifiableList(produtos);
     }
