@@ -22,9 +22,9 @@ public class CarrinnhoService implements Carrinho {
         this.locator = new ServiceLocator();
         carrinho = locator
                 .lookup("java:global/core/CarrinhoOnline", Carrinho.class);
-        carrinho.add("tv");
-        carrinho.add("cama");
-        carrinho.add("mesa");
+//        carrinho.add("tv");
+//        carrinho.add("cama");
+//        carrinho.add("mesa");
     }
 
     @Override

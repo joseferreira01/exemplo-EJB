@@ -8,7 +8,6 @@ import br.edu.ifpb.shared.ServiceLocator;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author jose
@@ -20,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
      */
     private ServiceLocator locato;
     private Calculadora calculadora;
+
     public Principal() {
         initComponents();
     }
@@ -38,6 +38,7 @@ public class Principal extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         IrCarrinho = new javax.swing.JButton();
+        jBMensagens = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,22 +64,33 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jBMensagens.setText("Ver mensagens");
+        jBMensagens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBMensagensActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(IrCarrinho)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(IrCarrinho)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                                .addComponent(jTextField1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton1)
+                                .addComponent(jLabel1))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel1))))
+                        .addComponent(jBMensagens)
+                        .addGap(85, 85, 85)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -94,7 +106,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(IrCarrinho)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBMensagens)
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,23 +119,31 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-this.locato = new ServiceLocator();
-this.calculadora = this.locato.
-        lookup("java:global/core/CalculadoraImpl", Calculadora.class);
-int x = Integer.parseInt(jTextField1.getText());
-int y = Integer.parseInt(jTextField2.getText());
+        this.locato = new ServiceLocator();
+        this.calculadora = this.locato.
+                lookup("java:global/core/CalculadoraImpl", Calculadora.class);
+        int x = Integer.parseInt(jTextField1.getText());
+        int y = Integer.parseInt(jTextField2.getText());
         int resultado = calculadora.somar(x, y);
-jLabel1.setText("RESULTADO: "+resultado);
-        
+        jLabel1.setText("RESULTADO: " + resultado);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void IrCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IrCarrinhoActionPerformed
         // TODO add your handling code here:
         Carrinho altprd = new Carrinho();
         altprd.setVisible(true);
-        altprd.setLocation(300,300);
+        altprd.setLocation(300, 300);
         altprd.setResizable(false);
     }//GEN-LAST:event_IrCarrinhoActionPerformed
+
+    private void jBMensagensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMensagensActionPerformed
+        // TODO add your handling code here:
+        Mensagem mensagens = new Mensagem();
+        mensagens.setVisible(true);
+        mensagens.setLocation(300, 300);
+          mensagens.setResizable(false);
+    }//GEN-LAST:event_jBMensagensActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +182,7 @@ jLabel1.setText("RESULTADO: "+resultado);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton IrCarrinho;
+    private javax.swing.JButton jBMensagens;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;

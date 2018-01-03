@@ -22,7 +22,7 @@ public class Carrinho extends javax.swing.JFrame {
         initComponents();
 
         service = new CarrinnhoService();
-       initTB();
+      // initTB();
 
     }
 
@@ -44,7 +44,7 @@ public class Carrinho extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BTAddProduto.setText("+");
+        BTAddProduto.setText("add");
         BTAddProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTAddProdutoActionPerformed(evt);
@@ -73,6 +73,11 @@ public class Carrinho extends javax.swing.JFrame {
         produtos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         finalizar.setText("Finalizar");
+        finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalizarActionPerformed(evt);
+            }
+        });
 
         btRemover.setText("Remover");
         btRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +96,7 @@ public class Carrinho extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(tfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BTAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -134,12 +139,16 @@ public class Carrinho extends javax.swing.JFrame {
         produto = String.valueOf(produtos.getModel()
                 .getValueAt(produtos.getSelectedRow(),
                          produtos.getSelectedColumn()));
-     DefaultTableModel val = (DefaultTableModel) produtos.getModel();
-    // initTB();
-     
-     val.removeRow(produtos.getSelectedRow());
+        service.remover(produto);
+     initTB();
         
     }//GEN-LAST:event_btRemoverActionPerformed
+
+    private void finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizarActionPerformed
+        // TODO add your handling code here:
+        service.finalizar();
+        this.dispose();
+    }//GEN-LAST:event_finalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,14 +195,23 @@ public class Carrinho extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initTB() {
+        limpaTabela();
         DefaultTableModel val = (DefaultTableModel) produtos.getModel();
-//        String[] e = (String[]) service.todosProdutos().toArray();
-//        System.err.println("rest "+e);
-//        val.addRow(e);
+       
 for (String elem : service.todosProdutos()) {
              val.addRow(new String[]{elem});
         }
        
          
     }
+
+public void limpaTabela() {
+     DefaultTableModel val = (DefaultTableModel) produtos.getModel();
+    // produtos.removeAll();
+		int size = val.getRowCount();
+                
+		for(int i = 0; i < size; i++) {
+			val.removeRow(i);
+		}
+	}
 }
